@@ -11,17 +11,16 @@ from locators import LocatorsBurgers
 class Test_transfer_to_personal_account:
     # Переход по клику на «Личный кабинет».
     def test_transition_personal_account(self, driver):
-        driver.find_element(*LocatorsBurgers.stellar_bugrers_button_personal_account).click()
+        driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_BUTTON_PERSONAL_ACCOUNT).click()
         WebDriverWait(driver, 10).until(
-            expected_conditions.visibility_of_element_located((By.XPATH, ".//h2[text()='Вход']")))
-        driver.find_element(*LocatorsBurgers.stellar_burgers_login).send_keys(*Data.AUTH_EMAIL)
-        driver.find_element(*LocatorsBurgers.stellar_burgers_password).send_keys(*Data.AUTH_PASSWORD)
-        driver.find_element(*LocatorsBurgers.stellar_burgers_button_enter_enter).click()
+            expected_conditions.visibility_of_element_located((LocatorsBurgers.STELLAR_BURGERS_TITLE_ENTER)))
+        driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_LOGIN).send_keys(*Data.AUTH_EMAIL)
+        driver.find_element(*LocatorsBurgers.STELLAE_BURGERS_PASSWORD).send_keys(*Data.AUTH_PASSWORD)
+        driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_BUTTON_ENTER_ENTER).click()
         WebDriverWait(driver, 10).until(
-            expected_conditions.visibility_of_element_located((By.XPATH, ".//h1")))
-        driver.find_element(*LocatorsBurgers.stellar_bugrers_button_personal_account).click()
+            expected_conditions.visibility_of_element_located
+            ((LocatorsBurgers.STELLAR_BURGERS_TITLE_ASSEMBLE_THE_BURGER)))
+        driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_BUTTON_PERSONAL_ACCOUNT).click()
         WebDriverWait(driver, 10).until(
-            expected_conditions.visibility_of_element_located((By.XPATH, ".//a[text()='Профиль']")))
-        time.sleep(1)
-        assert driver.find_element(By.XPATH, ".//a[contains(@href, 'profile')]").text == 'Профиль'
-        driver.quit()
+            expected_conditions.visibility_of_element_located((LocatorsBurgers.STELLAR_BURGERS_TITLE_PROFILE)))
+        assert driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_TITLE_PROFILE).text == 'Профиль'

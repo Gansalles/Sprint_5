@@ -7,4 +7,5 @@ def driver():
     chrome_driver = webdriver.Chrome()
     chrome_driver.get(Data.Stellar_Burgers_URL)
     chrome_driver.set_window_size(1920, 1080)
-    return chrome_driver
+    yield chrome_driver
+    chrome_driver.quit()

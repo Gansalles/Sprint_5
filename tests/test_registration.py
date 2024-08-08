@@ -16,27 +16,29 @@ class TestRegistration:
         generate_mail = List.mail()
         generate_password = List.correct_password()
 
-        driver.find_element(*LocatorsBurgers.stellar_bugrers_button_personal_account).click()
+        driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_BUTTON_PERSONAL_ACCOUNT).click()
         WebDriverWait(driver, 10).until(
-            expected_conditions.visibility_of_element_located((By.XPATH, ".//h2[text()='Вход']")))
-        driver.find_element(*LocatorsBurgers.stellar_bugrers_button_register).click()
+            expected_conditions.visibility_of_element_located((LocatorsBurgers.STELLAR_BURGERS_TITLE_ENTER)))
+        driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_BUTTON_REGISTER).click()
         WebDriverWait(driver, 10).until(
-            expected_conditions.visibility_of_element_located((By.XPATH, ".//h2[text()='Регистрация']")))
-        driver.find_element(By.XPATH, ".//fieldset[1]//input").send_keys(generate_name)
-        driver.find_element(By.XPATH, ".//fieldset[2]//input").send_keys(generate_mail)
-        driver.find_element(By.XPATH, ".//fieldset[3]//input").send_keys(generate_password)
-        driver.find_element(By.XPATH, ".//button[text()= 'Зарегистрироваться']").click()
+            expected_conditions.visibility_of_element_located((LocatorsBurgers.STELLAR_BURGERS_TITLE_REGISTER)))
+        driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_HOLDER_REGISTER_NAME).send_keys(generate_name)
+        driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_HOLDER_REGISTER_MAIL).send_keys(generate_mail)
+        driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_HOLDER_REGISTER_PASSWORD).send_keys(generate_password)
+        driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_BUTTON_REGISTER_FORM_REGISTER).click()
         WebDriverWait(driver, 10).until(
-            expected_conditions.visibility_of_element_located((By.XPATH, ".//h2[text()='Вход']")))
-        driver.find_element(*LocatorsBurgers.stellar_burgers_login).send_keys(generate_mail)
-        driver.find_element(*LocatorsBurgers.stellar_burgers_password).send_keys(generate_password)
-        driver.find_element(*LocatorsBurgers.stellar_burgers_button_enter_enter).click()
+            expected_conditions.visibility_of_element_located((LocatorsBurgers.STELLAR_BURGERS_TITLE_ENTER)))
+        driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_LOGIN).send_keys(generate_mail)
+        driver.find_element(*LocatorsBurgers.STELLAE_BURGERS_PASSWORD).send_keys(generate_password)
+        driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_BUTTON_ENTER_ENTER).click()
         WebDriverWait(driver, 10).until(
-            expected_conditions.visibility_of_element_located((By.XPATH, ".//h1")))
-        driver.find_element(*LocatorsBurgers.stellar_bugrers_button_personal_account).click()
-        time.sleep(1)
-        assert driver.find_element(By.XPATH, ".//a[contains(@href, 'profile')]").text == 'Профиль'
-        driver.quit()
+            expected_conditions.visibility_of_element_located
+            ((LocatorsBurgers.STELLAR_BURGERS_TITLE_ASSEMBLE_THE_BURGER)))
+        driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_BUTTON_PERSONAL_ACCOUNT).click()
+        WebDriverWait(driver, 10).until(
+            expected_conditions.visibility_of_element_located((LocatorsBurgers.STELLAR_BURGERS_TITLE_PROFILE)))
+        assert driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_TITLE_PROFILE).text == 'Профиль'
+
 
     ### Проверка на неверный пароль
 
@@ -46,15 +48,15 @@ class TestRegistration:
         generate_mail = List.mail()
         generate_wrong_password = List.wrong_password()
 
-        driver.find_element(*LocatorsBurgers.stellar_bugrers_button_personal_account).click()
+        driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_BUTTON_PERSONAL_ACCOUNT).click()
         WebDriverWait(driver, 10).until(
-            expected_conditions.visibility_of_element_located((By.XPATH, ".//h2[text()='Вход']")))
-        driver.find_element(*LocatorsBurgers.stellar_bugrers_button_register).click()
+            expected_conditions.visibility_of_element_located((LocatorsBurgers.STELLAR_BURGERS_TITLE_ENTER)))
+        driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_BUTTON_REGISTER).click()
         WebDriverWait(driver, 10).until(
-            expected_conditions.visibility_of_element_located((By.XPATH, ".//h2[text()='Регистрация']")))
-        driver.find_element(By.XPATH, ".//fieldset[1]//input").send_keys(generate_name)
-        driver.find_element(By.XPATH, ".//fieldset[2]//input").send_keys(generate_mail)
-        driver.find_element(By.XPATH, ".//fieldset[3]//input").send_keys(generate_wrong_password)
-        driver.find_element(By.XPATH, ".//button[text()= 'Зарегистрироваться']").click()
-        assert driver.find_element(By.XPATH, ".//p[text() = 'Некорректный пароль']").text
-        driver.quit()
+            expected_conditions.visibility_of_element_located((LocatorsBurgers.STELLAR_BURGERS_TITLE_REGISTER)))
+        driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_HOLDER_REGISTER_NAME).send_keys(generate_name)
+        driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_HOLDER_REGISTER_MAIL).send_keys(generate_mail)
+        driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_HOLDER_REGISTER_PASSWORD).send_keys(generate_wrong_password)
+        driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_BUTTON_REGISTER_FORM_REGISTER).click()
+        assert (driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_FORM_REGISTER_WRONG_PASSWORD).text
+                == 'Некорректный пароль')

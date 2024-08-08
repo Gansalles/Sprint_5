@@ -12,20 +12,19 @@ class TestExit:
 # Выход по кнопке «Выйти» в личном кабинете
 
     def test_exit_account(self, driver):
-        driver.find_element(*LocatorsBurgers.stellar_bugrers_button_personal_account).click()
+        driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_BUTTON_PERSONAL_ACCOUNT).click()
         WebDriverWait(driver, 10).until(
-            expected_conditions.visibility_of_element_located((By.XPATH, ".//h2[text()='Вход']")))
-        driver.find_element(*LocatorsBurgers.stellar_burgers_login).send_keys(*Data.AUTH_EMAIL)
-        driver.find_element(*LocatorsBurgers.stellar_burgers_password).send_keys(*Data.AUTH_PASSWORD)
-        driver.find_element(*LocatorsBurgers.stellar_burgers_button_enter_enter).click()
+            expected_conditions.visibility_of_element_located((LocatorsBurgers.STELLAR_BURGERS_TITLE_ENTER)))
+        driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_LOGIN).send_keys(*Data.AUTH_EMAIL)
+        driver.find_element(*LocatorsBurgers.STELLAE_BURGERS_PASSWORD).send_keys(*Data.AUTH_PASSWORD)
+        driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_BUTTON_ENTER_ENTER).click()
         WebDriverWait(driver, 10).until(
-        expected_conditions.visibility_of_element_located((By.XPATH, ".//h1[contains(@class, 'main')]")))
-        driver.find_element(*LocatorsBurgers.stellar_bugrers_button_personal_account).click()
+        expected_conditions.visibility_of_element_located
+        ((LocatorsBurgers.STELLAR_BURGERS_TITLE_ASSEMBLE_THE_BURGER)))
+        driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_BUTTON_PERSONAL_ACCOUNT).click()
         WebDriverWait(driver, 10).until(
-            expected_conditions.visibility_of_element_located((By.XPATH, ".//a[contains(@href, 'profile')]")))
-        driver.find_element(*LocatorsBurgers.stellar_bugrers_button_exit).click()
+            expected_conditions.visibility_of_element_located((LocatorsBurgers.STELLAR_BURGERS_TITLE_PROFILE)))
+        driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_BUTTON_EXIT).click()
         WebDriverWait(driver, 10).until(
-            expected_conditions.visibility_of_element_located((By.XPATH, ".//h2[text()='Вход']")))
-        time.sleep(1)
-        assert driver.find_element(By.XPATH, ".//h2").text == 'Вход'
-        driver.quit()
+            expected_conditions.visibility_of_element_located((LocatorsBurgers.STELLAR_BURGERS_TITLE_ENTER)))
+        assert driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_TITLE_ENTER).text == 'Вход'

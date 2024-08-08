@@ -1,10 +1,9 @@
-import time
-
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
 from locators import LocatorsBurgers
+
 
 ##### Раздел «Конструктор» #####
 
@@ -12,26 +11,25 @@ from locators import LocatorsBurgers
 # «Булки»,
 # «Соусы»,
 # «Начинки»
-# Дополнительно решил проверить, что при переключении разделов, блок с продуктами скролится
 
 class TestDesigner:
 
     def test_design(self, driver):
         WebDriverWait(driver, 10).until(
-            expected_conditions.visibility_of_element_located((By.XPATH, ".//h1")))
-        driver.find_element(*LocatorsBurgers.stellar_bugrers_botton_sauces).click()
-        print(driver.find_element(By.XPATH, "//h2[text()='Соусы']").location)
-        time.sleep(1)
-        assert (driver.find_element(By.XPATH, ".//main//div[2][contains(@class, 'current')]") and
-                driver.find_element(By.XPATH, ".//h2[text() = 'Соусы']").location == {'x': 332, 'y': 244})
-        driver.find_element(*LocatorsBurgers.stellar_bugrers_button_fillings).click()
-        print(driver.find_element(By.XPATH, "//h2[text()='Начинки']").location)
-        time.sleep(1)
-        assert (driver.find_element(By.XPATH, ".//main//div[3][contains(@class, 'current')]") and
-                driver.find_element(By.XPATH, "//h2[text() = 'Начинки']").location == {'x': 332, 'y': 244})
-        driver.find_element(*LocatorsBurgers.stellar_bugrers_button_rolls).click()
-        print(driver.find_element(By.XPATH, "//h2[text()='Булки']").location)
-        time.sleep(1)
-        assert (driver.find_element(By.XPATH, ".//main//div[1][contains(@class, 'current')]") and
-                driver.find_element(By.XPATH, ".//h2[text() = 'Булки']").location == {'x': 332, 'y': 244})
-        driver.quit()
+            expected_conditions.visibility_of_element_located
+            ((LocatorsBurgers.STELLAR_BURGERS_TITLE_ASSEMBLE_THE_BURGER)))
+        driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_BUTTON_SAUCES).click()
+        WebDriverWait(driver, 10).until(
+            expected_conditions.visibility_of_element_located
+            ((LocatorsBurgers.STELLAR_BURGERS_TITLE_ASSEMBLE_THE_BURGER)))
+        assert driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_ACTIVE_BUTTON_SAUCES)
+        driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_BUTTON_FILLINGS).click()
+        WebDriverWait(driver, 10).until(
+            expected_conditions.visibility_of_element_located
+            ((LocatorsBurgers.STELLAR_BURGERS_TITLE_ASSEMBLE_THE_BURGER)))
+        assert driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_ACTIVE_BUTTON_FILLINGS)
+        driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_BUTTON_ROLLS).click()
+        WebDriverWait(driver, 10).until(
+            expected_conditions.visibility_of_element_located
+            ((LocatorsBurgers.STELLAR_BURGERS_TITLE_ASSEMBLE_THE_BURGER)))
+        assert driver.find_element(*LocatorsBurgers.STELLAR_BURGERS_ACTIVE_BUTTON_ROLLS)
